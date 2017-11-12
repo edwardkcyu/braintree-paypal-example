@@ -1,7 +1,7 @@
 {
   "name": "payment-gateway",
   "version": "1.0.0",
-  "description": "Technical test for HK01",
+  "description": "payment-gateway",
   "main": "dist",
   "scripts": {
     "start": "nodemon -w src --exec \"babel-node src\"",
