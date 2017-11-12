@@ -8,19 +8,19 @@ If you are not using Yarn but NPM, you may replace all **_yarn_** below with **_
 `yarn`
 
 ## Configuration 
-Rename the **_config.example.json_** to **_config.json_**, fill in your keys created from your Paypayl and Braintree account.
+Rename the _src/_**_config.example.json_** to **_config.json_**, fill in your keys created from your Paypayl and Braintree account.
 ```json
 {
   "port": 8080,
   "redisPort": 6379,
   "mongoUrl": "mongodb://localhost:27017/paymentdb",
   "paypalConfig": {
-    "mode": "sandbox",  //sandbox or live
+    "mode": "sandbox",
     "clientId": "your client id",
     "clientSecret": "your client secret"
   },
   "braintreeConfig": {
-    "environment": "sandbox", // sandbox or production
+    "environment": "sandbox",
     "merchantId": "your merchant ID",
     "publicKey": "your public key",
     "privateKey": "your private key"

@@ -4,5 +4,5 @@ A frontend web app is provided for testing.
 
 
 Please following the guideline in both the server and client sides to start
-1. [Payment Gateway](./payment-gateway/README.md)
-2. [Payment Form](./payment-form/README.md)
+1. [Payment Gateway](./payment-gateway)
+2. [Payment Form](./payment-form)
