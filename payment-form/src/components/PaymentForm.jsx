@@ -156,10 +156,34 @@ export default class PaymentForm extends React.Component {
       };
     });
 
-    const verification = await service.checkPayable(
-      this.state.currency,
-      this.state.cardType
-    );
+    let verification;
+    try {
+       verification = await service.checkPayable(
+        this.state.currency,
+        this.state.cardType
+      );
+    }
+    catch(e) {
+      swal(
+        "Orz",
+        `Error connecting payment server`,
+        "error"
+      );
+
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          isProcessing: false
+        };
+      });
+
+      return;
+    }
+
+    // verification = await service.checkPayable(
+    //   this.state.currency,
+    //   this.state.cardType
+    // );
     if (!verification.allowed) {
       swal(
         "Orz",
