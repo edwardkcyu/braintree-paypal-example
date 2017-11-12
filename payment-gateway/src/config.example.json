@@ -1,0 +1,17 @@
+{
+  "port": 8080,
+  "redisPort": 6379,
+  "mongoUrl": "mongodb://localhost:27017/paymentdb",
+  "paypalConfig": {
+    "mode": "sandbox",  //sandbox or live
+    "clientId":"your client id",
+    "clientSecret":
+      "your client secret"
+  },
+  "braintreeConfig": {
+    "environment": "sandbox", // sandbox or production
+    "merchantId": "your merchant ID",
+    "publicKey": "your public key",
+    "privateKey": "your private key"
+  }
+}
