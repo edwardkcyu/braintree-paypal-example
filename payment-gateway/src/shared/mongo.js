@@ -1,4 +1,4 @@
-import Promise from "es6-promise";
+
 
 import { MongoClient } from "mongodb";
 import config from '../config.json'

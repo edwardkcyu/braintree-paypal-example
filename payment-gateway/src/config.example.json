@@ -3,10 +3,9 @@
   "redisPort": 6379,
   "mongoUrl": "mongodb://localhost:27017/paymentdb",
   "paypalConfig": {
-    "mode": "sandbox",  //sandbox or live
-    "clientId":"your client id",
-    "clientSecret":
-      "your client secret"
+    "mode": "sandbox", //sandbox or live
+    "clientId": "your client id",
+    "clientSecret": "your client secret"
   },
   "braintreeConfig": {
     "environment": "sandbox", // sandbox or production
