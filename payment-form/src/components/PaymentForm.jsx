@@ -130,7 +130,7 @@ export default class PaymentForm extends React.Component {
 
     return braintree
       .getClientToken()
-      .then(res => braintree.createClient(res.data))
+      .then(res => braintree.createClient(res.data.data.token))
       .then(clientInstance => braintree.tokenize(clientInstance, data))
       .then(nonce =>
         braintree.pay({
@@ -180,10 +180,6 @@ export default class PaymentForm extends React.Component {
       return;
     }
 
-    // verification = await service.checkPayable(
-    //   this.state.currency,
-    //   this.state.cardType
-    // );
     if (!verification.allowed) {
       swal(
         "Orz",
@@ -219,7 +215,7 @@ export default class PaymentForm extends React.Component {
           .catch(e => {
             swal(
               "Payment is not successful!",
-              e.response.data.meta.message || "",
+              e.response.data.meta.reason || "",
               "error"
             );
             this.setState(prevState => {
@@ -262,7 +258,7 @@ export default class PaymentForm extends React.Component {
           .catch(e => {
             swal(
               "Payment is not successful!",
-              e.response.data.meta.message || "",
+              e.response.data.meta.reason || "",
               "error"
             );
             this.setState(prevState => {

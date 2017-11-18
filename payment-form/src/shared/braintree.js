@@ -4,8 +4,7 @@ import { GATEWAY_URL } from "./constants";
 
 export const getClientToken = () => {
   return axios({
-    url: `${GATEWAY_URL}/client-token`,
-    responseType: "text"
+    url: `${GATEWAY_URL}/client-token`
   });
 };
 

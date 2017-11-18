@@ -1,5 +1,4 @@
-import { Promise } from "es6-promise";
-import paypal from "paypal-rest-sdk";
+import paypal from 'paypal-rest-sdk';
 
 export class PaypalClient {
   constructor({ mode, clientId, clientSecret }) {
@@ -11,29 +10,25 @@ export class PaypalClient {
     });
 
     this.cardTypeMapping = {
-      "master-card": "mastercard",
-      "american-express": "amex"      
-    }
+      'master-card': 'mastercard',
+      'american-express': 'amex'
+    };
   }
 
-  pay = ({
-    amount,
-    customerName,
-    cardHolder,
-    cardNumber,
-    cardExpirationMonth,
-    cardExpirationYear,
-    cardCvv,
-    cardType,
-    currency
-  }) => {
-    const firstName = customerName.split(' ').slice(0, -1).join(' ');
-    const lastName = customerName.split(' ').slice(-1).join(' ');
+  pay = ({ amount, customerName, cardHolder, cardNumber, cardExpirationMonth, cardExpirationYear, cardCvv, cardType, currency }) => {
+    const firstName = customerName
+      .split(' ')
+      .slice(0, -1)
+      .join(' ');
+    const lastName = customerName
+      .split(' ')
+      .slice(-1)
+      .join(' ');
 
     const payment = {
-      intent: "sale",
+      intent: 'sale',
       payer: {
-        payment_method: "credit_card",
+        payment_method: 'credit_card',
         funding_instruments: [
           {
             credit_card: {
@@ -43,7 +38,7 @@ export class PaypalClient {
               expire_year: cardExpirationYear,
               cvv2: cardCvv,
               first_name: firstName,
-              last_name: firstName === lastName? "" : lastName
+              last_name: firstName === lastName ? '' : lastName
             }
           }
         ]

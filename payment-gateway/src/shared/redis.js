@@ -1,23 +1,21 @@
-import redis from "redis";
-import Promise from "es6-promise";
+import redis from 'redis';
 
-import config from '../config.json'
+import config from '../config.json';
 
 export const createClient = () => {
-  return redis.createClient(config.redisPort, "localhost");
+  return redis.createClient(config.redisPort, 'localhost');
 };
 
 export const get = (redis, key) => {
   return new Promise((resolve, reject) => {
-    
     redis.get(key, (err, record) => {
       if (err) {
         reject(err);
       } else if (!record) {
-        reject("Not found from cache");
+        reject('Not found from cache');
       } else {
         // found in cache
-        resolve({...JSON.parse(record), remark: "from cache"});
+        resolve({ ...JSON.parse(record), remark: 'from cache' });
       }
     });
   });

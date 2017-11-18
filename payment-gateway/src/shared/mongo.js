@@ -1,7 +1,5 @@
-
-
-import { MongoClient } from "mongodb";
-import config from '../config.json'
+import { MongoClient } from 'mongodb';
+import config from '../config.json';
 
 export const createClient = () => {
   return new Promise((resolve, reject) => {
@@ -23,8 +21,12 @@ export const findOne = (mongo, collection, query) => {
       } else if (!record) {
         resolve(null);
       } else {
-        resolve({ ...record, remark: "from DB" });
+        resolve({ ...record, remark: 'from DB' });
       }
     });
   });
+};
+
+export const save = (mongo, collection, doc) => {
+  return mongo.collection(collection).insertOne(doc)
 };

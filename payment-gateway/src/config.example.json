@@ -3,14 +3,14 @@
   "redisPort": 6379,
   "mongoUrl": "mongodb://localhost:27017/paymentdb",
   "paypalConfig": {
-    "mode": "sandbox", //sandbox or live
-    "clientId": "your client id",
-    "clientSecret": "your client secret"
+    "mode": "sandbox",
+    "clientId": "YOUR_CLIENT_ID",
+    "clientSecret": "YOUR_CLIENT_SECRET"
   },
   "braintreeConfig": {
-    "environment": "sandbox", // sandbox or production
-    "merchantId": "your merchant ID",
-    "publicKey": "your public key",
-    "privateKey": "your private key"
+    "environment": "sandbox",
+    "merchantId": "YOUR_MERCHANT_ID",
+    "publicKey": "YOUR_PUBLIC_KEY",
+    "privateKey": "YOUR_PRIVATE_KEY"
   }
 }

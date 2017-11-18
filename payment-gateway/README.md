@@ -16,17 +16,16 @@ Rename the _src/_**_config.example.json_** to **_config.json_**, fill in your ke
   "mongoUrl": "mongodb://localhost:27017/paymentdb",
   "paypalConfig": {
     "mode": "sandbox",
-    "clientId": "your client id",
-    "clientSecret": "your client secret"
+    "clientId": "YOUR_CLIENT_ID",
+    "clientSecret": "YOUR_CLIENT_SECRET"
   },
   "braintreeConfig": {
     "environment": "sandbox",
-    "merchantId": "your merchant ID",
-    "publicKey": "your public key",
-    "privateKey": "your private key"
+    "merchantId": "YOUR_MERCHANT_ID",
+    "publicKey": "YOUR_PUBLIC_KEY",
+    "privateKey": "YOUR_PRIVATE_KEY"
   }
 }
-
 ```
 
 ## Environment preparation

@@ -1,20 +1,16 @@
-import braintree from "braintree";
-import { Promise } from "es6-promise";
+import braintree from 'braintree';
 
 export class BraintreeClient {
   constructor({ environment, merchantId, publicKey, privateKey }) {
     this.gateway = braintree.connect({
-      environment:
-        environment === "production"
-          ? braintree.Environment.Production
-          : braintree.Environment.Sandbox,
+      environment: environment === 'production' ? braintree.Environment.Production : braintree.Environment.Sandbox,
       merchantId,
       publicKey,
       privateKey
     });
   }
 
-  pay = ({amount, nonce}) => {
+  pay = ({ amount, nonce }) => {
     return new Promise((resolve, reject) => {
       this.gateway.transaction.sale(
         {
@@ -24,7 +20,7 @@ export class BraintreeClient {
             submitForSettlement: true
           }
         },
-        function(err, result) {
+        (err, result) => {
           if (err) {
             reject(err);
           } else {
@@ -37,7 +33,7 @@ export class BraintreeClient {
 
   generateClientToken = () => {
     return new Promise((resolve, reject) => {
-      this.gateway.clientToken.generate({}, function(err, response) {
+      this.gateway.clientToken.generate({}, (err, response) => {
         if (err) {
           reject(err);
         } else {

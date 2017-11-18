@@ -1,74 +1,38 @@
-import { Router } from "express";
-import * as redis from "../shared/redis";
-import * as mongo from "../shared/mongo";
-import * as ErrorConstants from "../constants/error";
+import { Router } from 'express';
+import * as redis from '../shared/redis';
+import * as mongo from '../shared/mongo';
+import * as ErrorConstants from '../constants/error';
+import { standardizeErrorResponse, standardizeResponse } from './services/utils';
+import { retrieveTransaction } from './services/transaction';
 
 export const transactionRoutes = ({ db, cache }) => {
   const api = Router();
 
-  api.get("/transactions/", (req, res) => {
+  api.get('/transactions/', async (req, res) => {
     const { customerName, paymentId } = req.query;
-    console.log(req.body);
-    console.log(req.query);
 
     if (!customerName) {
-      res.status(400).send({
-        meta: {
-          code: 4001,
-          message: "Invalid customer name",
-          type: ErrorConstants.BAD_REQUEST
-        },
-        data: {}
-      });
+      res
+        .status(400)
+        .send(
+          standardizeErrorResponse({ code: 4001, error: 'Invalid customer name', type: ErrorConstants.BAD_REQUEST })
+        );
     } else if (!paymentId) {
-      res.status(400).send({
-        meta: {
-          code: 4002,
-          message: "Invalid payment ID",
-          type: ErrorConstants.BAD_REQUEST
-        },
-        data: {}
-      });
+      res
+        .status(400)
+        .send(standardizeErrorResponse({ code: 4002, error: 'Invalid payment ID', type: ErrorConstants.BAD_REQUEST }));
     } else {
-      redis
-        .get(cache, `transaction:${customerName}:${paymentId}`)
-        .catch(() => {
-          return mongo
-            .findOne(db, "transaction", { customerName, paymentId })
-            .then(transaction => {
-              if (transaction) {
-                redis.set(
-                  cache,
-                  `transaction:${customerName}:${paymentId}`,
-                  transaction
-                ); // cache the record
-              }
-
-              return transaction;
-            });
-        })
-        .then(transaction => {          
-          res.status(200).send({
-            meta: {
-              code: 200
-            },
-            data: {
-              transaction
-            }
-          });
-          
-        })
-        .catch(e => {
-          console.log(e);
-          res.status(500).send({
-            meta: {
-              code: 500,
-              message: "Internal Server Error",
-              type: ErrorConstants.INTERNAL_ERROR
-            },
-            data: {}
-          });
-        });
+      try {
+        let transaction = await retrieveTransaction({ db, cache, customerName, paymentId });
+        res.status(200).send(standardizeResponse({ code: 200, data: { transaction } }));
+      } catch (e) {
+        console.error(e);
+        res
+          .status(500)
+          .send(
+            standardizeErrorResponse({ code: 500, error: 'Internal Server Error', type: ErrorConstants.INTERNAL_ERROR })
+          );
+      }
     }
   });
 

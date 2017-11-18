@@ -1,2 +1,2 @@
-export * from "./BraintreeClient"
-export * from "./PaypalClient"
+export * from './BraintreeClient';
+export * from './PaypalClient';
